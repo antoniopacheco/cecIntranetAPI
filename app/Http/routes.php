@@ -19,3 +19,10 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+#Instructores
+Route::get('instructores','InstructorController@index');
+Route::get('instructores/{id}','InstructorController@show');
+Route::post('instructores','InstructorController@store');
+Route::put('instructores/{id}','InstructorController@update');
+Route::delete('instructores/{id}','InstructorController@destroy');
