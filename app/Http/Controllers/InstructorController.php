@@ -12,7 +12,7 @@ class InstructorController extends Controller {
 	 */
 	public function index()
 	{
-		$instructores = \App\Models\Instructor::get();
+		$instructores = \App\Models\Instructor::orderBy('nombre','asc')->get();
 		return response()->json([
 			'msg'=>'success',
 			'instructores' => $instructores->toArray()
