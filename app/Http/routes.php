@@ -20,9 +20,16 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+#users
+Route::post('users/register', 'Admin\UserController@save');
 #Instructores
-Route::get('instructores','InstructorController@index');
+Route::get('instructores',['uses' => 'InstructorController@index']);
 Route::get('instructores/{id}','InstructorController@show');
 Route::post('instructores','InstructorController@store');
 Route::put('instructores/{id}','InstructorController@update');
 Route::delete('instructores/{id}','InstructorController@destroy');
+
+#Cursos
+
+Route::get('cursos/proximos',['uses' => 'CursosController@get_proximos']);
+Route::get('cursos/proximos/{id}',['uses' => 'CursosController@show_proximo']);

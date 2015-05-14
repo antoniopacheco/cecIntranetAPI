@@ -78,7 +78,7 @@ return [
 	|
 	*/
 
-	'key' => env('APP_KEY', 'SomeRandomString'),
+	'key' => env('APP_KEY', '%9=%.K:^g=4%-vNR-T+5=~84_%XLXQ8g'),
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -143,8 +143,10 @@ return [
 		'App\Providers\BusServiceProvider',
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
+		'Jlapp\Swaggervel\SwaggervelServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		'Barryvdh\Cors\CorsServiceProvider',
+		'Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider',
 
 	],
 

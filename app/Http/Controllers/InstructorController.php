@@ -2,17 +2,21 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-class InstructorController extends Controller {
+use App\Models\Instructor;
+use App\User;
+use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
+class InstructorController  extends ApiGuardController {
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
+
+
 	public function index()
 	{
-		$instructores = \App\Models\Instructor::orderBy('nombre','asc')->get();
+		$instructores = Instructor::orderBy('nombre','asc')->get();
 		return response()->json([
 			'msg'=>'success',
 			'instructores' => $instructores->toArray()
@@ -20,15 +24,15 @@ class InstructorController extends Controller {
 	}
 
 
+	public function store()
+	{
+		//
+	}
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
-		//
-	}
 
 	/**
 	 * Display the specified resource.

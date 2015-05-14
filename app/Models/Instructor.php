@@ -2,7 +2,8 @@
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-	
+use App\User;
+
 class Instructor extends Model {
 
 
@@ -26,5 +27,9 @@ class Instructor extends Model {
 	 * @var array
 	 */
 	protected $hidden = [];
+
+	public function user(){
+		return $this->belongsTo('App\User');
+	}
 
 }
