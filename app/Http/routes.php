@@ -23,7 +23,7 @@ Route::controllers([
 #users
 Route::post('users/register', 'Admin\UserController@save');
 #Instructores
-Route::get('instructores',['uses' => 'InstructorController@index']);
+Route::get('instructores',['uses' => 'InstructorController@index']); //ya sirve
 Route::get('instructores/{id}','InstructorController@show');
 Route::post('instructores','InstructorController@store');
 Route::put('instructores/{id}','InstructorController@update');

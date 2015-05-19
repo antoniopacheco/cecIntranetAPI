@@ -6,6 +6,9 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+/**
+ * @SWG\Model(id="User")
+ */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
 	use Authenticatable, CanResetPassword;
@@ -22,6 +25,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
+	/**
+ * @SWG\Property(
+ *      name="name",
+ *		type="string",
+ *      description="Nombre del Usuario"),
+ *		required=true
+ */
 	protected $fillable = ['name', 'email', 'password'];
 
 	/**

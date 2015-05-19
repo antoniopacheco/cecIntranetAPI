@@ -49,10 +49,10 @@ class CursosController  extends ApiGuardController {
  *   description="Referente a los cursos",
  *   @SWG\Operation(
 *	  method="GET", 
-*		summary="Busca Grupo por ID", 
-*		notes="Regresa la información de un curso programado (grupo) a partir de su ID",
+*		summary="Obtiene información de grupos programados", 
+*		notes="Regresa la información de los cursos programado (grupo)",
 *		type="Curso_Ofertado", 
-*		nickname="getProximos",
+*		nickname="getProximos"
 *
 * 	)
 *)

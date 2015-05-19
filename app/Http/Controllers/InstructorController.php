@@ -5,20 +5,40 @@ use App\Http\Controllers\Controller;
 use App\Models\Instructor;
 use App\User;
 use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
+use Swagger\Annotations as SWG;
+
+/**
+ * @SWG\Resource(
+ *     apiVersion="1.0",
+ *     swaggerVersion="2.0",
+ *     resourcePath="/instructores",
+ *     basePath="http://api.intranet.com"
+ * )
+ */
 class InstructorController  extends ApiGuardController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-
+/**
+ *
+ * @SWG\Api(
+ *   path="/instructores",
+ *   description="Referente a los Instructores",
+ *   @SWG\Operation(
+*	  method="GET", 
+*		summary="Obtiene información de los instructores", 
+*		notes="Regresa la información de los Instructores",
+*		type="Instructor", 
+*		nickname="getInstructores"
+*
+* 	)
+* )
+*/
 
 	public function index()
 	{
 		$instructores = Instructor::orderBy('nombre','asc')->get();
 		return response()->json([
 			'msg'=>'success',
+			'cantidad_instructores' => $instructores->count(),
 			'instructores' => $instructores->toArray()
 			],200);
 	}
@@ -28,40 +48,45 @@ class InstructorController  extends ApiGuardController {
 	{
 		//
 	}
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+/**
+ *
+ * @SWG\Api(
+ *   path="/instructores/{id_instructor}",
+ *   description="Referente a los Instructores",
+ *   @SWG\Operation(
+*	  method="GET", 
+*		summary="Obtiene información de un Instructor Por ID", 
+*		notes="Regresa la información del Instructor",
+*		type="Instructor", 
+*		nickname="getInstructorByID",
+*		@SWG\Parameter(
+*		name="id_instructor", 
+*		description="ID del instructor", 
+*		paramType="path", 
+*		required=true, 
+*		allowMultiple=false, 
+*		type="integer"
+*  		),
+*		@SWG\ResponseMessage(code=401, message="Unauthorized")
+* 	),
+*
+*		
+* )
+*/
 	public function show($id)
 	{
-		//
+		$instructor = Instructor::find($id);
+		return response()->json([
+			'msg' => 'success',
+			'instructor' => $instructor
+			],200);
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
 	{
 		//
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
 		//
