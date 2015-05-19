@@ -8,7 +8,8 @@
 		"laravel/framework": "5.0.*",
 		"barryvdh/laravel-cors": "0.5.x@dev",
 		"chrisbjr/api-guard": "2.0.*",
-		"zircote/swagger-php": "*"
+		"zircote/swagger-php": "*",
+		"latrell/swagger": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

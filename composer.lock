@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "86614f3a5c85ab12011deb4c38fe7e9f",
+    "hash": "89d568c1c4c199c92ce9b92d503f1e07",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -855,6 +855,62 @@
                 "laravel"
             ],
             "time": "2015-05-11 22:15:00"
+        },
+        {
+            "name": "latrell/swagger",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Latrell/Swagger.git",
+                "reference": "46ee908e34817b7a46538b5e2c9bc993eafd0244"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Latrell/Swagger/zipball/46ee908e34817b7a46538b5e2c9bc993eafd0244",
+                "reference": "46ee908e34817b7a46538b5e2c9bc993eafd0244",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "5.*",
+                "illuminate/console": "5.*",
+                "illuminate/support": "5.*",
+                "illuminate/view": "5.*",
+                "php": ">=5.4.0",
+                "zircote/swagger-php": "*"
+            },
+            "require-dev": {
+                "mockery/mockery": "*",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/controllers"
+                ],
+                "psr-0": {
+                    "Latrell\\Swagger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Latrell Chan",
+                    "email": "i@latrell.me"
+                }
+            ],
+            "description": "Swagger for Laravel 5",
+            "keywords": [
+                "Swagger-PHP",
+                "l5",
+                "laravel",
+                "laravel 5",
+                "swagger",
+                "swagger-ui"
+            ],
+            "time": "2015-05-15 07:08:50"
         },
         {
             "name": "league/flysystem",
@@ -3266,7 +3322,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "barryvdh/laravel-cors": 20
+        "barryvdh/laravel-cors": 20,
+        "latrell/swagger": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

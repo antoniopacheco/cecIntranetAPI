@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'debug' => env('APP_DEBUG', false),
+	'debug' => env('APP_DEBUG', true),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://api.intranet.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'America/Tijuana',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -143,8 +143,8 @@ return [
 		'App\Providers\BusServiceProvider',
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
-		'Jlapp\Swaggervel\SwaggervelServiceProvider',
-		'App\Providers\RouteServiceProvider',
+        'Latrell\Swagger\SwaggerServiceProvider',
+        'App\Providers\RouteServiceProvider',
 		'Barryvdh\Cors\CorsServiceProvider',
 		'Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider',
 
