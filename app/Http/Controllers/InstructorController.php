@@ -199,9 +199,126 @@ protected $rules = ['nombre' => 'required|min:5',
 			],200);
 	}
 
-	public function update($id)
-	{
-		//
+/**
+ *
+ * @SWG\Api(
+ *   path="/instructores/{id_instructor}",
+ *   description="Referente a los Instructores",
+ *   @SWG\Operation(
+*	  method="PUT", 
+*		summary="Actualiza información un Instructor", 
+*		notes="Regresa al Instructor",
+*		type="Instructor", 
+*		nickname="updateInstructor",
+*		@SWG\Parameter(
+*		name="id_instructor", 
+*		description="ID Del instructor", 
+*		paramType="path", 
+*		required=true, 
+*		allowMultiple=false, 
+*		type="integer"
+*  		),
+*		@SWG\Parameter(
+*		name="nombre", 
+*		description="nombre completo del instructor", 
+*		paramType="form", 
+*		required=true, 
+*		allowMultiple=false, 
+*		type="string"
+*  		),
+*		@SWG\Parameter(
+*		name="direccion", 
+*		description="Direccion completa del instructor", 
+*		paramType="form", 
+*		required=false, 
+*		allowMultiple=false, 
+*		type="string"
+*  		),
+*		@SWG\Parameter(
+*		name="email", 
+*		description="Correo Electrónico  del instructor", 
+*		paramType="form", 
+*		required=false, 
+*		allowMultiple=false, 
+*		type="string"
+*  		),
+*		@SWG\Parameter(
+*		name="email2", 
+*		description="Correo Electrónico Alternativo del instructor", 
+*		paramType="form", 
+*		required=false, 
+*		allowMultiple=false, 
+*		type="string"
+*  		),
+*		@SWG\Parameter(
+*		name="celular", 
+*		description="Numero telefonico Móvil del Instructor", 
+*		paramType="form", 
+*		required=false, 
+*		allowMultiple=false, 
+*		type="string"
+*  		),
+*		@SWG\Parameter(
+*		name="telefono", 
+*		description="Numero telefonico Fijo del Instructor", 
+*		paramType="form", 
+*		required=false, 
+*		allowMultiple=false, 
+*		type="string"
+*  		),
+*		@SWG\Parameter(
+*		name="RFC", 
+*		description="RFC del Instructor", 
+*		paramType="form", 
+*		required=true, 
+*		allowMultiple=false, 
+*		type="string"
+*  		),
+*		@SWG\Parameter(
+*		name="CURP", 
+*		description="CURP del Instructor", 
+*		paramType="form", 
+*		required=false, 
+*		allowMultiple=false, 
+*		type="string"
+*  		),
+*		@SWG\Parameter(
+*		name="cursos", 
+*		description="cursos que da el Instructor", 
+*		paramType="form", 
+*		required=false, 
+*		allowMultiple=false, 
+*		type="string"
+*  		),
+*		@SWG\Parameter(
+*		name="activo", 
+*		description="Indica si el Instructor se encuentra disponible laboralmente", 
+*		paramType="form", 
+*		required=false, 
+*		allowMultiple=false, 
+*		type="string"
+*  		),
+*		@SWG\Parameter(
+*		name="id_cede", 
+*		description="Cede del instructor", 
+*		paramType="form", 
+*		required=true, 
+*		allowMultiple=false, 
+*		type="integer"
+*  		)
+* 	)
+* )
+*/
+
+	public function update($id){
+		$validator = Validator::make(Input::all(),$this->rules);
+		$input = Input::all();
+		$instructor = Instructor::find($id);
+		$instructor->update($input);
+		$instructor->save();
+		return response()->json([
+			'instructor' => $instructor
+		],200);
 	}
 
 	public function destroy($id)

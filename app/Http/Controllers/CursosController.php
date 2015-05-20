@@ -53,7 +53,6 @@ class CursosController  extends ApiGuardController {
 *		notes="Regresa la información de los cursos programado (grupo)",
 *		type="Curso_Ofertado", 
 *		nickname="getProximos"
-*
 * 	)
 *)
  */

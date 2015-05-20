@@ -24,9 +24,9 @@ Route::controllers([
 Route::post('users/register', 'Admin\UserController@save');
 #Instructores
 Route::get('instructores',['uses' => 'InstructorController@index']); //ya sirve
-Route::get('instructores/{id}','InstructorController@show');
-Route::post('instructores','InstructorController@store');
-Route::put('instructores/{id}','InstructorController@update');
+Route::get('instructores/{id}','InstructorController@show'); //ya sirve (falta integrar informacion adicional)
+Route::post('instructores','InstructorController@store'); //ya sirve
+Route::put('instructores/{id}','InstructorController@update'); // ya sirve
 Route::delete('instructores/{id}','InstructorController@destroy');
 
 #Cursos
