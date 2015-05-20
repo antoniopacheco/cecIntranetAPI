@@ -163,7 +163,7 @@ protected $rules = ['nombre' => 'required|min:5',
 			'input' => $input,
 			'validator' => $validator,
 			'id_insstructor' => $instructor->id_instructor
-		],200);
+		],201);
 	}
 /**
  *
@@ -320,10 +320,34 @@ protected $rules = ['nombre' => 'required|min:5',
 			'instructor' => $instructor
 		],200);
 	}
-
-	public function destroy($id)
-	{
-		//
+/**
+ *
+ * @SWG\Api(
+ *   path="/instructores/{id_instructor}",
+ *   description="Referente a los Instructores",
+ *   @SWG\Operation(
+*	  method="DELETE", 
+*		summary="Elimina a un instructor", 
+*		notes="Elimina al instructor y todo lo referente a este",
+*		nickname="deleteInstructorByID",
+*		@SWG\Parameter(
+*		name="id_instructor", 
+*		description="ID del instructor", 
+*		paramType="path", 
+*		required=true, 
+*		allowMultiple=false, 
+*		type="integer"
+*  		),
+*		@SWG\ResponseMessage(code=401, message="Unauthorized")
+* 	),
+*
+*		
+* )
+*/
+	public function destroy($id){
+		$instructor = Instructor::find($id);
+		$instructor->delete();
+		return response()->json([],200);
 	}
 
 }
