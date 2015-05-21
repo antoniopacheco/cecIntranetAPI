@@ -7,6 +7,7 @@ use App\Models\Curso_ofertar;
 use App\User;
 use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
 use Swagger\Annotations as SWG;
+use Input;
 /**
  * @SWG\Info(
  *   title="CEC Tijuana Intranet",
@@ -38,9 +39,43 @@ class CursosController  extends ApiGuardController {
             'level' => 5
         ]
 	];
+/**
+ *
+ * @SWG\Api(
+ *   path="/cursos",
+ *   description="Referente a los cursos",
+ *   @SWG\Operation(
+*	  method="GET", 
+*		summary="Obtiene información de los Cursos", 
+*		notes="El parametro extra filtrará los cursos por el areaa",
+*		type="Curso", 
+*		nickname="showCursos",
+*		@SWG\Parameter(
+*		name="tipo", 
+*		description="ID del tipo de curso", 
+*		paramType="query", 
+*		required=false, 
+*		allowMultiple=false, 
+*		type="string"
+*  		),
+*
+* 	)
+* )
+*/
+protected static $restful = true;
 
 	public function index(){
-
+		$cursos = Curso::orderBy('nombre_curso','asc');
+		// if($area)
+		// 	$cursos = $cursos->where('id_tip')
+		if(Input::get('tipo'))
+			$cursos = $cursos->where('id_tipos_cursos','=',Input::get('tipo'));
+		$cursos = $cursos->get();
+		return response()->json([
+			'msg'=>'success',
+			'cantidad_cursos' => $cursos->count(),
+			'cursos' => $cursos->toArray()
+			],200);
 	}
 /**
  *
