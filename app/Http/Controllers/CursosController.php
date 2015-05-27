@@ -37,6 +37,9 @@ class CursosController  extends ApiGuardController {
 	protected $apiMethods = [
 		'get_proximos' => [
             'level' => 5
+        ],
+        'get_corriendo' =>[
+        	'level' =>7
         ]
 	];
 /**
@@ -46,7 +49,7 @@ class CursosController  extends ApiGuardController {
  *   description="Referente a los cursos",
  *   @SWG\Operation(
 *	  method="GET", 
-*		summary="Obtiene información de los Cursos", 
+*		summary="Obtiene información de los CursosController", 
 *		notes="El parametro extra filtrará los cursos por el areaa",
 *		type="Curso", 
 *		nickname="showCursos",
@@ -133,5 +136,28 @@ protected static $restful = true;
 			'cantidad_cursos' => $curso->count(),
 			'curso' => $curso
 			],200);
+	}
+/**
+ *
+ * @SWG\Api(
+ *   path="/cursos/corriendo",
+ *   description="Referente a los cursos",
+ *   @SWG\Operation(
+*	  method="GET", 
+*		summary="Regresa Cursos Corriendo Actualmente", 
+*		notes="Regresa los Cursos Corriendo",
+*		type="Curso_Ofertado", 
+*		nickname="getCursoById",
+*		@SWG\ResponseMessage(code=401, message="Unauthorized")
+* 	)
+*)
+ */
+	public function get_corriendo(){
+		$cursos = Curso_ofertar::with(array('Curso','Instructor'))->where('id_status_cursos','=',2)->get();
+		return response()->json([
+		'msg'=>'success',
+		'cantidad_cursos' => $cursos->count(),
+		'cursos' => $cursos->toArray()
+		],200);
 	}
 }

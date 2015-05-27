@@ -33,3 +33,4 @@ Route::get('cursos',['uses' => 'CursosController@index']);
 #Grupos
 Route::get('cursos/proximos',['uses' => 'CursosController@get_proximos']);
 Route::get('cursos/proximos/{id}',['uses' => 'CursosController@show_proximo']);
+Route::get('cursos/corriendo',['uses' => 'CursosController@get_corriendo']);
