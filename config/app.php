@@ -147,7 +147,6 @@ return [
         'App\Providers\RouteServiceProvider',
 		'Barryvdh\Cors\CorsServiceProvider',
 		'Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider',
-
 	],
 
 	/*

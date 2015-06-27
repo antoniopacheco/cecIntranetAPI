@@ -1,30 +1,27 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\User;
-use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
-use Swagger\Annotations as SWG;
-use Input;
-use Illuminate\Http\Request;
+use App\Client;
+
 /**
  * @SWG\Resource(
  *     apiVersion="1.0",
  *     swaggerVersion="2.0",
- *     resourcePath="/user",
+ *     resourcePath="/client",
  *     basePath="http://api.intranet.com"
  * )
  */
-class UserController extends ApiGuardController {
+class ClientController extends ApiGuardController {
 /**
  *
  * @SWG\Api(
- *   path="/user/register",
+ *   path="client/register",
  *   description="Referente a los Usuarios",
  *   @SWG\Operation(
 *	  method="POST", 
-*		summary="Graba un usuario nuevo", 
-*		notes="Graba un usuario nuevo en el sistema de la Intranet",
-*		type="User", 
-*		nickname="userRegister",
+*		summary="Graba un cliente nuevo", 
+*		notes="Graba un cliente nuevo en el sistema de la Intranet",
+*		type="Client", 
+*		nickname="clientRegister",
 *		@SWG\Parameter(
 	*		name="name", 
 	*		description="nombre del usuario", 
@@ -52,13 +49,12 @@ class UserController extends ApiGuardController {
 *	)
 *)
  */
-	public function save(Request $request) {
-
-        $user = new User ();
-        $user -> name = $request->name;
-        $user -> email = $request->email;
-        $user -> password = bcrypt($request->password);
-        $user -> save();
+	public function save(UserRequest $request) {
+        $client = new Client ();
+        $client -> name = $request->name;
+        $client -> email = $request->email;
+        $client -> password = bcrypt($request->password);
+        $client -> save();
     }
 
 

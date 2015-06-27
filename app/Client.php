@@ -7,9 +7,9 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 /**
- * @SWG\Model(id="User")
+ * @SWG\Model(id="Client")
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+class Client extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
 	use Authenticatable, CanResetPassword;
 
@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var string
 	 */
-	protected $table = 'users2';
+	protected $table = 'api_users';
 
 	/**
 	 * The attributes that are mass assignable.
