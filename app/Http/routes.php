@@ -30,8 +30,8 @@ Route::get('instructores/{id}','InstructorController@show');
 Route::post('instructores','InstructorController@store'); 
 Route::put('instructores/{id}','InstructorController@update'); 
 Route::delete('instructores/{id}','InstructorController@destroy');
-#Curss
-Route::get('cursos',['uses' => 'CursosController@index','middleware' => 'auth.basic']);
+#Cursos
+Route::get('cursos',['uses' => 'CursosController@index','middleware' => 'auth.basic.once']);
 #Grupos
 Route::get('cursos/proximos',['uses' => 'CursosController@get_proximos']);
 Route::get('cursos/proximos/{id}',['uses' => 'CursosController@show_proximo']);
