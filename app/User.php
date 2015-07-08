@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-
+use App\Http\Models\Privilegios_aplicaciones;
 /**
  * @SWG\Model(id="User")
  */
@@ -40,5 +40,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
+
+
+	public function privilegios_aplicaciones(){
+		return $this->hasMany('App\Models\Privilegios_aplicaciones','users_id')->with('aplicacion');
+	}
 
 }

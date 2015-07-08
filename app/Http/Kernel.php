@@ -22,12 +22,15 @@ class Kernel extends HttpKernel {
 	 *
 	 * @var array
 	 */
+
 	protected $routeMiddleware = [
 		'auth' => 'App\Http\Middleware\Authenticate',
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
 		'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
 		'simpleauth' => 'App\http\Middleware\simpleAuthMiddleware',
-		'auth.basic.once' => 'App\http\Middleware\OnceAuth'
+		'auth.basic.once' => 'App\http\Middleware\OnceAuth',
+		'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
+		'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
 	];
 
 }

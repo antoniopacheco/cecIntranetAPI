@@ -139,14 +139,15 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
-		'App\Providers\AppServiceProvider',
+		'App\Providers\AppServiceProvider',	
 		'App\Providers\BusServiceProvider',
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
         'Latrell\Swagger\SwaggerServiceProvider',
         'App\Providers\RouteServiceProvider',
-		'Barryvdh\Cors\CorsServiceProvider',
 		'Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider',
+		'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
+		 'Barryvdh\Cors\ServiceProvider',
 	],
 
 	/*
@@ -194,6 +195,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+		'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+		'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory'
 
 	],
 

@@ -1,0 +1,174 @@
+{
+    "basePath": "http://api.intranet.com",
+    "swaggerVersion": "2.0",
+    "apiVersion": "1.0",
+    "resourcePath": "/cursos",
+    "apis": [
+        {
+            "path": "/cursos",
+            "description": "Referente a los cursos",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Obtiene informaci\u00f3n de los CursosController",
+                    "nickname": "showCursos",
+                    "type": "Curso",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "tipo",
+                            "type": "string",
+                            "required": false,
+                            "allowMultiple": false,
+                            "description": "ID del tipo de curso"
+                        }
+                    ],
+                    "notes": "El parametro extra filtrar\u00e1 los cursos por el areaa"
+                }
+            ]
+        },
+        {
+            "path": "/cursos/corriendo",
+            "description": "Referente a los cursos",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Regresa Cursos Corriendo Actualmente",
+                    "nickname": "getCursoById",
+                    "type": "Curso_Ofertado",
+                    "responseMessages": [
+                        {
+                            "code": 401,
+                            "message": "Unauthorized"
+                        }
+                    ],
+                    "notes": "Regresa los Cursos Corriendo"
+                }
+            ]
+        },
+        {
+            "path": "/cursos/proximos",
+            "description": "Referente a los cursos",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Obtiene informaci\u00f3n de grupos programados",
+                    "nickname": "getProximos",
+                    "type": "Curso_Ofertado",
+                    "notes": "Regresa la informaci\u00f3n de los cursos programado (grupo)"
+                }
+            ]
+        },
+        {
+            "path": "/cursos/proximos/{id_curso_ofertar}",
+            "description": "Referente a los cursos",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "Busca Grupo por ID",
+                    "nickname": "getCursoById",
+                    "type": "Curso_Ofertado",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id_curso_ofertar",
+                            "type": "integer",
+                            "required": true,
+                            "allowMultiple": false,
+                            "description": "ID del curso ofertar"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 401,
+                            "message": "Unauthorized"
+                        }
+                    ],
+                    "notes": "Regresa la informaci\u00f3n de un curso programado (grupo) a partir de su ID"
+                }
+            ]
+        }
+    ],
+    "models": {
+        "Curso": {
+            "id": "Curso",
+            "properties": {
+                "id_curso": {
+                    "description": "Identificador del curso",
+                    "type": "integer"
+                },
+                "nombre_curso": {
+                    "description": "Nombre completo del curso",
+                    "type": "string"
+                }
+            }
+        },
+        "Curso_Ofertado": {
+            "id": "Curso_Ofertado",
+            "required": [
+                "curso",
+                "id_curso_ofertar",
+                "instructor"
+            ],
+            "properties": {
+                "id_curso_ofertar": {
+                    "description": "Identificador del Grupo",
+                    "type": "integer"
+                },
+                "curso": {
+                    "description": "Informaci\u00f3n del Curso",
+                    "$ref": "Curso"
+                },
+                "instructor": {
+                    "description": "Instructor del Grupo",
+                    "$ref": "Instructor"
+                },
+                "capacidad_alumnos": {
+                    "description": "Capacidad m\u00e1xima del Grupo",
+                    "type": "integer"
+                }
+            }
+        },
+        "Instructor": {
+            "id": "Instructor",
+            "properties": {
+                "nombre": {
+                    "description": "Nombre completo del instructor",
+                    "type": "string"
+                },
+                "direccion": {
+                    "description": "Direcci\u00f3n completa del instructor",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "Correo Electr\u00f3nico del instructor",
+                    "type": "string"
+                },
+                "email2": {
+                    "description": "Correo Electr\u00f3nico alterno del instructor",
+                    "type": "string"
+                },
+                "celular": {
+                    "description": "N\u00famero telefonico m\u00f3vil del instructor",
+                    "type": "string"
+                },
+                "RFC": {
+                    "description": "RFC del instructor",
+                    "type": "string"
+                },
+                "CURP": {
+                    "description": "CURP del instructor",
+                    "type": "string"
+                },
+                "activo": {
+                    "description": "Indica si el Instructor se encuentra disponible laboralmente",
+                    "type": "string"
+                },
+                "id_cede": {
+                    "description": "ID de la cede que lo dio de alta",
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

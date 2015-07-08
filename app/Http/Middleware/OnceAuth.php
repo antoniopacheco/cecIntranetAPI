@@ -40,4 +40,8 @@ class OnceAuth implements Middleware {
 		return  $next($request);
 	}
 
+	public function getInfo(){
+		return $this->auth;
+	}
+
 }

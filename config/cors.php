@@ -17,12 +17,12 @@ return array(
      */
     'defaults' => array(
         'supportsCredentials' => false,
-        'allowedOrigins' => array(),
-        'allowedHeaders' => array(),
-        'allowedMethods' => array(),
+        'allowedOrigins' => array('*'),
+        'allowedHeaders' => array('*'),
+        'allowedMethods' => array('*'),
         'exposedHeaders' => array(),
         'maxAge' => 0,
-        'hosts' => array(''),
+        'hosts' => array('*'),
     ),
 
     'paths' => array(
@@ -30,14 +30,17 @@ return array(
             'allowedOrigins' => array('*'),
             'allowedHeaders' => array('*'),
             'allowedMethods' => array('*'),
+            'exposedHeaders' => [],
             'maxAge' => 3600,
+            'hosts' => array('*'),
         ),
         '*' => array(
             'allowedOrigins' => array('*'),
-            'allowedHeaders' => array('Content-Type'),
-            'allowedMethods' => array('POST', 'PUT', 'GET', 'DELETE'),
+            'allowedHeaders' => array('*'),
+            'allowedMethods' => array('*'),
+            'exposedHeaders' => [],
             'maxAge' => 3600,
-            'hosts' => array('api.*','148*','*intranetv2.com*'),
+            'hosts' => array('*'),
         ),
     ),
 

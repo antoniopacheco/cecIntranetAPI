@@ -22,6 +22,7 @@ public function __construct() {
     parent::__construct();
 }
 
+
 protected $rules = ['nombre' => 'required|min:5',
 						'RFC' => 'required|min:10'];
 /**
