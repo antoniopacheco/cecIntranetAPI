@@ -1,4 +1,8 @@
-/vendor
+vendor/
 /node_modules
 /public/vendor
+/database/*
+bootstrap/cache/*
+*.log
 .env
+storage/
