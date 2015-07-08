@@ -8,6 +8,8 @@ use Swagger\Annotations as SWG;
 use Input;
 use Illuminate\Http\Request;
 use Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Controllers\Admin\UserController;
 /**
  * @SWG\Resource(
  *     apiVersion="1.0",
@@ -18,9 +20,24 @@ use Validator;
  */
 class InstructorController  extends ApiGuardController {
 
+private $token;
+private $user;
+private  $application = 'Instructores'; //aplicación 2 = instructores
+private $apps;
 public function __construct() {
     parent::__construct();
+	$this->token = JWTAuth::getToken();
+    $this->user = JWTAuth::toUser($this->token);
+    $this->apps = UserController::getAppsByUser($this->user);
+	$this->beforeFilter(function(){
+	    if(!array_key_exists($this->application,$this->apps)){
+	    	return response()->json([
+	    		'msg' => 'Sin Privilegios Suficientes'
+	    	],403);
+	    }
+	});
 }
+
 
 
 protected $rules = ['nombre' => 'required|min:5',

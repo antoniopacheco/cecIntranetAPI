@@ -26,7 +26,7 @@ Route::group(['middleware' => 'cors'], function(){
       #users
       Route::post('user/register', 'Admin\UserController@save');
       Route::post('user/getlogin',['uses' => 'Admin\UserController@getlogin']);
-
+      Route::get('user/getApps',['uses' => 'Admin\UserController@getApps','middleware' => 'jwt.auth']);
       //Route::get('user/getLogin',['uses' => 'Admin\UserController@getLoginInfo','middleware' => 'auth.basic.once']);
 
 

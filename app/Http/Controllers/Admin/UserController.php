@@ -24,7 +24,6 @@ class UserController extends ApiGuardController {
 
 	public function __construct(Guard $auth)
 	{
-		//var_dump($auth);
 		$this->user = $auth;
 	}
 /**
@@ -172,6 +171,74 @@ class UserController extends ApiGuardController {
     	}
 
 		return $returnApps;
+    }
+
+    public function getApps(){
+        $token = JWTAuth::getToken();
+        $user = JWTAuth::toUser($token);
+        $apps = $this::getAppsByUser($user);
+        return response()->json([
+            'msg' => 'Ok',
+            'apps' => $apps
+        ],200);
+    }
+
+     public static function getAppsByUser($user){
+        $user_id = $user->id;
+        $AppsWithDescription = array();
+        $allApps = Aplicaciones::all();
+        foreach ($allApps as $app) {
+            if($user->role_id == 1){ // si es admin todo esta permitodo
+                $AppsWithDescription[$app->Nombre]['ruta'] = $app->controlador;
+                $AppsWithDescription[$app->Nombre]['metodo'] = $app->metodo;
+                $AppsWithDescription[$app->Nombre]['icono'] = $app->icono;
+                $AppsWithDescription[$app->Nombre]['l'] = true;
+                $AppsWithDescription[$app->Nombre]['e'] = true;
+                $AppsWithDescription[$app->Nombre]['b'] = true;
+                $AppsWithDescription[$app->Nombre]['m'] = true;
+            }else{
+                if($app->lectura == 0){
+                    $AppsWithDescription[$app->Nombre]['ruta'] = $app->controlador;
+                    $AppsWithDescription[$app->Nombre]['metodo'] = $app->metodo; 
+                    $AppsWithDescription[$app->Nombre]['l'] = true;                 
+                }
+            }
+        }
+        if($user->role_id == 1){
+            $returnApps = $AppsWithDescription;
+        }else{
+            $AppsWithDescription = array();
+            $myApps = User::with(array('privilegios_aplicaciones'))->find($user_id);
+            foreach ($myApps->privilegios_aplicaciones as $app) {
+                $AppsWithDescription[$app->aplicacion->Nombre]['id'] = $app->aplicacion->id_aplicacion;
+                $AppsWithDescription[$app->aplicacion->Nombre]['ruta'] = $app->aplicacion->controlador;
+                $AppsWithDescription[$app->aplicacion->Nombre]['metodo'] = $app->aplicacion->metodo;
+                switch ($app->tipo_privilegios_id_tipo_privilegio) {
+                    case 1:
+                        $AppsWithDescription[$app->aplicacion->Nombre]['l'] = true;
+                    break;
+                    case 2:
+                        $AppsWithDescription[$app->aplicacion->Nombre]['e'] = true;
+                    break;
+                    case 3:
+                        $AppsWithDescription[$app->aplicacion->Nombre]['m'] = true;
+                    break;
+                    case 4:
+                        $AppsWithDescription[$app->aplicacion->Nombre]['b'] = true;
+                    break;
+                    case 5:
+                        $AppsWithDescription[$app->aplicacion->Nombre]['l'] = true;
+                        $AppsWithDescription[$app->aplicacion->Nombre]['e'] = true;
+                        $AppsWithDescription[$app->aplicacion->Nombre]['b'] = true;
+                        $AppsWithDescription[$app->aplicacion->Nombre]['m'] = true;
+                    break;                                      
+                }
+            }
+
+            $returnApps = $AppsWithDescription;
+        }
+
+        return $returnApps;
     }
 
     public function getLoginInfo(){
