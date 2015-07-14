@@ -179,7 +179,8 @@ class UserController extends ApiGuardController {
         $apps = $this::getAppsByUser($user);
         return response()->json([
             'msg' => 'Ok',
-            'apps' => $apps
+            'apps' => $apps,
+            'user' => $user
         ],200);
     }
 

@@ -208,8 +208,7 @@ protected $rules = ['nombre' => 'required|min:5',
 *		
 * )
 */
-	public function show($id)
-	{
+	public function show($id){
 		$instructor = Instructor::find($id);
 		return response()->json([
 			'msg' => 'success',

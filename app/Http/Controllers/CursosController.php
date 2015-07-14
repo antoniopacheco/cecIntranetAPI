@@ -160,4 +160,35 @@ protected static $restful = true;
 		'cursos' => $cursos->toArray()
 		],200);
 	}
+
+/**
+ *
+ * @SWG\Api(
+ *   path="/cursos/getCountByYear",
+ *   description="Referente a los cursos",
+ *   @SWG\Operation(
+*	  method="GET", 
+*		summary="Regresa Cursos tatal por año", 
+*		notes="Regresa Cursos tatal por año",
+*		type="Curso_Ofertado", 
+*		nickname="getCountByYear",
+*		@SWG\ResponseMessage(code=401, message="Unauthorized")
+* 	)
+*)
+ */
+	public function get_total_anual(){
+		$year = date('Y');
+		$cursos_poa = 200;
+		$cursos = Curso_ofertar::
+		where('fechainicial','<',($year+1).'-00')
+		->where('fechainicial','>',($year-1).'-13')
+		->where('id_status_cursos', '<', 5)
+		->count();
+		return response()->json([
+		'msg'=>'success',
+		'cursos_actual' => $cursos,
+		'cursos_poa' => $cursos_poa,
+		'pocentaje' => (int)($cursos*100/$cursos_poa)
+		],200);		
+	}
 }

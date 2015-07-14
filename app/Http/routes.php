@@ -38,10 +38,15 @@ Route::group(['middleware' => 'cors'], function(){
       Route::delete('instructores/{id}','InstructorController@destroy');
       #Cursos
       Route::get('cursos',['uses' => 'CursosController@index','middleware' => 'auth.basic.once']);
+      Route::get('cursos/getCountByYear',['uses' => 'CursosController@get_total_anual']);
       #Grupos
       Route::get('cursos/proximos',['uses' => 'CursosController@get_proximos']);
       Route::get('cursos/proximos/{id}',['uses' => 'CursosController@show_proximo']);
       Route::get('cursos/corriendo',['uses' => 'CursosController@get_corriendo']);
+      #POA
+      Route::get('poa/getResume',['uses' => 'PoaController@getResume']);
+      #Pagos
+      Route::get('pagos/getResume',['uses' => 'PagosController@getResume','middleware' => 'jwt.auth']);
 
       Route::get('/restricted', [
          'middleware' => 'jwt.auth',
