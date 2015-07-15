@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Curso_ofertar;
 use App\Models\Poa;
 use App\Models\Alumno_curso;
+use App\Models\View_resumen_anual_mensual;
+
 use App\User;
 use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
 use Swagger\Annotations as SWG;
@@ -40,6 +42,7 @@ class PoaController  extends ApiGuardController {
 
 	public function getResume(){
 		$year = date('Y');
+		$ingresos = View_resumen_anual_mensual::get()->toarray();
 		$poa = Poa::
 		with(array('tipo_poa'))
 		->where('ano',2015)
@@ -90,7 +93,7 @@ class PoaController  extends ApiGuardController {
 					->count();
 				break;
 				case 'ingresos':
-					$absoluto = 0;
+					
 				break;
 				case 'usuarios':
 					$absoluto = Alumno_curso::with('curso_ofertar')
@@ -112,9 +115,31 @@ class PoaController  extends ApiGuardController {
 $poaArray[$singlepoa->ano]['total'][$singlepoa->tipo_poa->tipo]['porcentaje'] = (int)($poaArray[$singlepoa->ano]['total'][$singlepoa->tipo_poa->tipo]['ofertado']*100/$poaArray[$singlepoa->ano]['total'][$singlepoa->tipo_poa->tipo]['programado']);			 			
 			
 		}
+		$ingresoTotal=0;
+		foreach ($ingresos as $ingreso) {
+			if($ingreso['number'] < 5)
+				$index = 1;
+			elseif($ingreso['number'] >=4 && $ingreso['number'] < 7)
+				$index = 2;
+			elseif($ingreso['number'] >=7 && $ingreso['number'] < 10)
+				$index = 3;
+			else
+				$index = 4;
+
+			if(isset($poaArray[$year][$index]['ingresos']['ofertado']))
+				$poaArray[$year][$index]['ingresos']['ofertado'] += $ingreso['actual'];
+			else
+				$poaArray[$year][$index]['ingresos']['ofertado'] = $ingreso['actual'];
+			
+			$poaArray[$year][$index]['ingresos']['porcentaje'] = (int) ($poaArray[$year][$index]['ingresos']['ofertado']*100 / $poaArray[$year][$index]['ingresos']['programado']);
+			$ingresoTotal+= $ingreso['actual'];
+		}
+			$poaArray[$year]['total']['ingresos']['ofertado'] = $ingresoTotal;
+			$poaArray[$year]['total']['ingresos']['porcentaje'] = (int)($poaArray[$year]['total']['ingresos']['ofertado']*100/$poaArray[$year]['total']['ingresos']['programado']);
+
 		return response()->json([
 			'msg'=>'success',
-			'poatrimestral' => $poaArray
-			],200);
+			'poa' => $poaArray			
+		],200);
 	}
 }
