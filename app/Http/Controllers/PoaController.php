@@ -139,7 +139,8 @@ $poaArray[$singlepoa->ano]['total'][$singlepoa->tipo_poa->tipo]['porcentaje'] = 
 
 		return response()->json([
 			'msg'=>'success',
-			'poa' => $poaArray			
+			'poa' => $poaArray,
+			'ingresos' => $ingresos
 		],200);
 	}
 }

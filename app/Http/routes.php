@@ -44,7 +44,7 @@ Route::group(['middleware' => 'cors'], function(){
       Route::get('cursos/proximos/{id}',['uses' => 'CursosController@show_proximo']);
       Route::get('cursos/corriendo',['uses' => 'CursosController@get_corriendo']);
       #POA
-      Route::get('poa/getResume',['uses' => 'PoaController@getResume']);
+      Route::get('poa/getResume',['uses' => 'PoaController@getResume','middleware' => 'jwt.auth']);
       #Pagos
       Route::get('pagos/getResume',['uses' => 'PagosController@getResume','middleware' => 'jwt.auth']);
 
