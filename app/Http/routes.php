@@ -47,19 +47,8 @@ Route::group(['middleware' => 'cors'], function(){
       Route::get('poa/getResume',['uses' => 'PoaController@getResume','middleware' => 'jwt.auth']);
       #Pagos
       Route::get('pagos/getResume',['uses' => 'PagosController@getResume','middleware' => 'jwt.auth']);
+      #Mensajeria
+      Route::get('Mensajeria',['uses' => 'MensajeriaController@index','middleware' => 'jwt.auth']);
 
-      Route::get('/restricted', [
-         'middleware' => 'jwt.auth',
-         function () {
-             $token = JWTAuth::getToken();
-             $user = JWTAuth::toUser($token);
-
-             return Response::json([
-                 'data' => [
-                     'email' => $user->email,
-                     'registered_at' => $user->created_at->toDateTimeString()
-                 ]
-             ]);
-         }
-      ]);
+      
 });
